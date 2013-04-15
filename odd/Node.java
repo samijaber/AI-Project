@@ -4,19 +4,38 @@ import java.util.LinkedList;
 
 public class Node {
 	OddMove move;
-	double winrate;
-	double visited;
+	public double wins;
+	public double visited;
 	Node parent;
 	LinkedList<Node> child;
+	
+	//Constructor for root Node.
+	public Node() {
+		wins = 0;
+		visited = 0;
+		move = null;
+		parent = null;
+	}
 	
 	public Node(OddMove move, Node parent){
 		this.move = move;
 		this.parent = parent;
-		winrate = 0;
+		wins = 0;
 		visited = 0;
 	}
 	
 	public void addChild(Node ch) {
 		child.add(ch);
+	}
+	
+	public boolean isRoot(){
+		if (parent == null)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

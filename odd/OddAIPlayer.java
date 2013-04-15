@@ -12,6 +12,11 @@ public class OddAIPlayer extends Player {
 	OddBoard currBoard;
 	private LinkedList<OddMove> valid_moves;
 	private LinkedList<OddMove> score_moves;
+	private OddRandomPlayer rnd1 = new OddRandomPlayer();
+	private OddRandomPlayer rnd2 = new OddRandomPlayer();
+	private int SELECTION_CUTOFF = 8;
+	private int TIME_CUTOFF = 4000;
+	private Node root = new Node();
 
 	public OddAIPlayer(String name) {
 		super(name);
@@ -21,22 +26,50 @@ public class OddAIPlayer extends Player {
 
 	@Override
 	public Move chooseMove(Board board) {
+		long start = System.currentTimeMillis();
 		currBoard = (OddBoard) board;
 		valid_moves = currBoard.getValidMoves();
+		
+		//for later? Maybe if we need to get the # of
+		//clusters because we are not done with the computation
+		//and need to stop where we are right now.
 		int clusters = getNumClusters(currBoard);
+		
+		while((start - System.currentTimeMillis()) < 4000) {
+			monteCarlo();
+		}
+		
 		return null;
 	}
 	
+	public void monteCarlo() {
+		//create a deep copy of the current board.
+		OddBoard board = (OddBoard) currBoard.clone();
+		
+		//Step 1: Selection
+		Node selected = selection(board);
+		
+		//Step 2: Simulation
+		simulation()
+	}
+	
 	public void backprop(Node n, int score){
-		
+		//Make sure score is determined properly in Simulation.
+		n.wins += score;
+		if (!n.isRoot())
+			backprop(n.parent, score);
 	}
 	
-	public void selection(){
-		
+	/*
+	 * Deterministic selection and execution up until some node.
+	 */
+	public void selection(OddBoard board){
+		return null;
 	}
 	
-	public void simulation(){
-		
+	public void simulation(Node n, OddBoard board){
+		//
+		//Now simulate random games starting at that node.
 	}
 	
     //Same as DetermineWinner() basically. Returns the current number of clusters

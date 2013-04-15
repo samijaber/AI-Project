@@ -1,3 +1,5 @@
 2	RandomPlayer	RandomPlayer	Player2	RandomPlayer	0	game00002.log	
 3	Human	RandomPlayer	UNDECIDED	NOBODY	0	game00003.log	USER CANCEL
 4	RandomPlayer	RandomPlayer	Player2	RandomPlayer	0	game00004.log	
+7	RandomPlayer	RandomPlayer	Player2	RandomPlayer	0	game00007.log	
+8	RandomPlayer	RandomPlayer	Player1	RandomPlayer	0	game00008.log	

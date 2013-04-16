@@ -50,7 +50,7 @@ public class OddAIPlayer extends Player {
 		Node selected = selection(board);
 		
 		//Step 2: Simulation
-		simulation()
+		simulation();
 	}
 	
 	public void backprop(Node n, int score){

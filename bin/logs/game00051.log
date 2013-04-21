@@ -1,0 +1,12 @@
+# Server version 0.05 running on 192.168.0.101:8123
+# Game ID: 51
+# Board class: odd.OddBoard
+# Timeout: 5000
+# Date: Sun Apr 21 16:21:44 EDT 2013
+# Player 1: Player1, 'THE MIGHTY AI', running on 192.168.0.101
+# Player 2: Player2, 'RandomPlayer', running on 192.168.0.101
+START Player1 THE MIGHTY AI
+START Player2 RandomPlayer
+GAMEOVER TIMEOUT Player1
+WINNER Player2
+# Game ended: Sun Apr 21 16:21:49 EDT 2013

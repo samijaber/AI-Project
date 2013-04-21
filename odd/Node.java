@@ -77,7 +77,7 @@ public class Node {
 			exploration = exploration/Math.sqrt(visited);
 		}
 		
-		return wins + constant * exploration;
+		return getwinRate() + constant * exploration;
 	}
 	
 }

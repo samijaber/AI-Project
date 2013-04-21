@@ -9,7 +9,7 @@ import boardgame.Player;
 public class MyPlayer extends Player {
 	OddBoard currBoard;
 	private OddRandomPlayer rnd1 = new OddRandomPlayer();
-	private int TIME_CUTOFF = 4000;
+	private int TIME_CUTOFF = 3000;
 	private int turn = 0;
 	private Node leaf;
 
@@ -31,13 +31,13 @@ public class MyPlayer extends Player {
 		turn = board.getTurn();
 		
 		Node root = new Node();
-
+		
 		while((System.currentTimeMillis() - start) < TIME_CUTOFF) {
 			monteCarlo(root);
 		}
-		
+		System.out.println(System.currentTimeMillis() - start);
 		Move best = selectBestMove(root);
-		
+		System.out.println(System.currentTimeMillis() - start);
 		return best;
 	}
 	
@@ -72,6 +72,7 @@ public class MyPlayer extends Player {
 	public Node selection(Node root, OddBoard board){
 		Node n = root;
 		boolean leaf = false;
+		boolean max = true;
 		
 		if(n.child.isEmpty())
 			leaf = true;
@@ -82,44 +83,63 @@ public class MyPlayer extends Player {
 			
 			//get value of general unexplored node
 			double unexplored = Math.sqrt(Math.log(n.visited));
-			double maxvisited = 0;
-			for (Node c : n.child)
-			{
-				if (c.UCB() > maxvisited)
-				{
-					next = c;
-					maxvisited = c.UCB();
-				}
-			}
 			
-			
-			if ((unexplored >= maxvisited) && board.getValidMoves().size() != n.child.size())
+			if(max)
 			{
-				//all visited have lower value than an unexplored one
-				//pick an unexplored one at random from possible moves
-				if (!n.isRoot())
+
+				double maxvisited = 0;
+				for (Node c : n.child)
 				{
-					board.move(n.move);
+					if (c.UCB() > maxvisited)
+					{
+						next = c;
+						maxvisited = c.UCB();
+					}
 				}
-				OddMove chosen = pickMove(board.getValidMoves(), n);
-				next = new Node(chosen, n);
+
+
+				if ((unexplored >= maxvisited) && board.getValidMoves().size() != n.child.size())
+				{
+					//all visited have lower value than an unexplored one
+					//pick an unexplored one at random from possible moves
+
+					OddMove chosen = pickMove(board.getValidMoves(), n);
+					next = new Node(chosen, n);
+				}
 			}
 			else
 			{
-				if(!n.isRoot())
-					board.move(n.move);
+				double minvisited = 100;
+				for (Node c : n.child)
+				{
+					if (c.UCB() < minvisited)
+					{
+						next = c;
+						minvisited = c.UCB();
+					}
+				}
+
+
+				if ((unexplored <= minvisited) && board.getValidMoves().size() != n.child.size())
+				{
+					//all visited have lower value than an unexplored one
+					//pick an unexplored one at random from possible moves
+					OddMove chosen = pickMove(board.getValidMoves(), n);
+					next = new Node(chosen, n);
+				}
 			}
-			
+						
+			board.move(next.move);
 			n = next;
+			max = !max;
 			
 			if(n.child.isEmpty())
-			{
 				leaf = true;
-			}
 		}
 		
 		return n;
 	}
+	
 	
 	public OddMove pickMove(LinkedList<OddMove> valid, Node n){
 		for (OddMove m : valid)
@@ -185,4 +205,13 @@ public class MyPlayer extends Player {
 		}
 		return best.move;
 	}
+}
+
+class monteCarlo implements Runnable {
+	
+@Override
+public void run() {
+	// TODO Auto-generated method stub
+	
+}
 }

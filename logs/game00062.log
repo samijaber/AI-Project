@@ -1,0 +1,73 @@
+# Server version 0.05 running on open-17.CS.McGill.CA:8123
+# Game ID: 62
+# Board class: odd.OddBoard
+# Timeout: 5000
+# Date: Sun Apr 21 18:03:18 EDT 2013
+# Player 1: Player1, 'THE MIGHTY AI', running on open-17.CS.McGill.CA
+# Player 2: Player2, 'RandomPlayer', running on open-17.CS.McGill.CA
+START Player1 THE MIGHTY AI
+START Player2 RandomPlayer
+1 WHITE -4 -4
+2 WHITE -1 -2
+1 WHITE -3 -4
+2 BLACK -3 0
+1 BLACK -1 -1
+2 WHITE 0 4
+1 WHITE -4 -3
+2 WHITE -2 0
+1 WHITE -4 -2
+2 WHITE 0 -2
+1 BLACK 3 4
+2 BLACK 0 -3
+1 WHITE -1 0
+2 BLACK -3 1
+1 WHITE 1 4
+2 BLACK 3 3
+1 WHITE -4 -1
+2 BLACK -3 -1
+1 WHITE -4 0
+2 BLACK 2 -2
+1 BLACK 1 3
+2 BLACK -2 -3
+1 WHITE -3 -3
+2 BLACK 3 2
+1 WHITE -1 1
+2 BLACK -1 3
+1 BLACK 1 2
+2 BLACK 0 0
+1 WHITE -2 -4
+2 BLACK -1 -4
+1 BLACK -3 -2
+2 BLACK 1 -3
+1 WHITE -2 -2
+2 BLACK 3 -1
+1 WHITE -2 -1
+2 BLACK 0 -1
+1 WHITE 0 1
+2 WHITE 2 0
+1 WHITE 0 -4
+2 BLACK 1 1
+1 WHITE 0 2
+2 WHITE 3 0
+1 BLACK -2 1
+2 BLACK 4 3
+1 BLACK 1 -2
+2 BLACK 4 0
+1 WHITE -2 2
+2 BLACK -1 -3
+1 BLACK -1 2
+2 WHITE 4 1
+1 WHITE 4 4
+2 BLACK 2 2
+1 BLACK 0 3
+2 WHITE 2 4
+1 BLACK 2 -1
+2 WHITE 2 1
+1 BLACK 1 -1
+2 WHITE 2 3
+1 BLACK 1 0
+2 WHITE 3 1
+1 WHITE 4 2
+GAMEOVER 
+WINNER Player1
+# Game ended: Sun Apr 21 18:05:22 EDT 2013

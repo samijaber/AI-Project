@@ -2,60 +2,65 @@ package odd;
 
 import java.util.LinkedList;
 
-import odd.OddBoard.Piece;
-
 import boardgame.Board;
 import boardgame.Move;
 import boardgame.Player;
 
 public class MyPlayer extends Player {
 	OddBoard currBoard;
-	private LinkedList<OddMove> valid_moves;
-	private LinkedList<OddMove> score_moves;
 	private OddRandomPlayer rnd1 = new OddRandomPlayer();
-	private OddRandomPlayer rnd2 = new OddRandomPlayer();
-	private int SELECTION_CUTOFF = 8;
 	private int TIME_CUTOFF = 4000;
-	private Node root = new Node();
+	private int turn = 0;
+	private Node leaf;
 
-	public MyPlayer(String name) {
-		super(name);
+	public MyPlayer() {
+		super("THE MIGHTY AI");
 		currBoard = null;
-		// TODO Auto-generated constructor stub
 	}
+	
+	public MyPlayer(String name) {
+		super("THE MIGHTY AI");
+		currBoard = null;
+	}
+	
 
 	@Override
 	public Move chooseMove(Board board) {
 		long start = System.currentTimeMillis();
 		currBoard = (OddBoard) board;
-		valid_moves = currBoard.getValidMoves();
+		turn = board.getTurn();
 		
-		//for later? Maybe if we need to get the # of
-		//clusters because we are not done with the computation
-		//and need to stop where we are right now.
-		int clusters = getNumClusters(currBoard);
-		
-		while((start - System.currentTimeMillis()) < 4000) {
-			monteCarlo();
+		Node root = new Node();
+
+		while((System.currentTimeMillis() - start) < TIME_CUTOFF) {
+			monteCarlo(root);
 		}
 		
-		return null;
+		Move best = selectBestMove(root);
+		
+		return best;
 	}
 	
-	public void monteCarlo() {
+	public void monteCarlo(Node root) {
 		//create a deep copy of the current board.
 		OddBoard board = (OddBoard) currBoard.clone();
 		
 		//Step 1: Selection
-		Node selected = selection(board);
+		Node selected = selection(root, board);
 		
-		//Step 2: Simulation
-		simulation();
+		//Step 2: Expansion
+		
+		//Step 3: Simulation
+		int winner = simulation(selected, board);
+		
+		//Step 4: Back propagation
+		backprop(leaf, winner);
 	}
 	
 	public void backprop(Node n, int score){
 		//Make sure score is determined properly in Simulation.
 		n.wins += score;
+		n.visited ++;
 		if (!n.isRoot())
 			backprop(n.parent, score);
 	}
@@ -63,77 +68,114 @@ public class MyPlayer extends Player {
 	/*
 	 * Deterministic selection and execution up until some node.
 	 */
-	public void selection(OddBoard board){
-		return null;
-	}
-	
-	public void simulation(Node n, OddBoard board){
-		//
-		//Now simulate random games starting at that node.
-	}
-	
-    //Same as DetermineWinner() basically. Returns the current number of clusters
-    public int getNumClusters(OddBoard board) {
-    	int SIZE= OddBoard.SIZE;
-    	int SIZE_DATA = SIZE*2+1;
-    	
-    	int[] parent = new int[SIZE_DATA * SIZE_DATA];
-    	for (int k = 0; k < parent.length; k++) parent[k] = -1;
-    	
-    	int crt_index = 0;
-    	for (int j = -SIZE; j <= SIZE; j++)
-			for (int i = -SIZE; i <= SIZE; i++, crt_index++) {
-				Piece crt_piece = board.getPieceAt(i, j);
-				if(crt_piece == Piece.INVALID || crt_piece == Piece.EMPTY) continue;
-				
-				int connection_code = 0; // used to know which neighbours are connected		
-				if(board.getPieceAt(i - 1, j - 1) == crt_piece) connection_code++;
-				if(board.getPieceAt(i, j - 1) == crt_piece) connection_code += 2;
-				if(board.getPieceAt(i - 1, j) == crt_piece) connection_code += 4;
-				
-				switch (connection_code) {
-				case 1: 
-				case 2:
-				case 3: // one connection, have to look for root
-					//find root
-					int y = crt_index - SIZE_DATA - ((connection_code == 1) ? 1 : 0);
-					do{
-						int tmp = y;
-						y = parent[y];
-						parent[tmp] = crt_index; 
-					}while (y >= 0);
-					parent[crt_index] += y;
-					break;
-				case 6: // two connections
-					//find root
-					y = crt_index - SIZE_DATA; int z=y;
-					do{
-						z = y;
-						y = parent[y];
-						parent[z] = crt_index; 
-					}while (y >= 0);					
-					// if root not the same, then we have to connect the second piece
-					parent[crt_index] += y;
-					if( z == crt_index - 1) break;
-				default:  //one connection to its closest neighbour
-					parent[crt_index] += parent[crt_index-1];
-					parent[crt_index-1] = crt_index;
-					break;					
-				case 0: // no neighbours
-					break;
+	public Node selection(Node root, OddBoard board){
+		Node n = root;
+		boolean leaf = false;
+		
+		while (!leaf)
+		{
+			Node next = new Node();
+			
+			//get value of general unexplored node
+			double unexplored = Math.sqrt(Math.log(n.visited));
+			double maxvisited = 0;
+			for (Node c : n.child)
+			{
+				if (c.UCB() > maxvisited)
+				{
+					next = c;
+					maxvisited = c.UCB();
 				}
 			}
-    	int num_clusters = 0;
-		for (int k = 0; k < parent.length; k++) {
-			if(parent[k] <= -OddBoard.MIN_CLUSTER_SIZE) num_clusters++;
-			int y = k;
-			while (y >= 0) y = parent[y];
-			if(y <= -OddBoard.MIN_CLUSTER_SIZE) 
-				board.getBoardData()[k % SIZE_DATA][k / SIZE_DATA] = 
-					( board.getBoardData()[k % SIZE_DATA][k / SIZE_DATA] == Piece.WP ) ?
-							Piece.WP_CLUST : Piece.BP_CLUST;
+			
+			
+			if ((unexplored >= maxvisited) && board.getValidMoves().size() != n.child.size())
+			{
+				//all visited have lower value than an unexplored one
+				//pick an unexplored one at random from possible moves
+				if (!n.isRoot())
+				{
+					board.move(n.move);
+				}
+				OddMove chosen = pickMove(board.getValidMoves(), n);
+				n = new Node(chosen, n);
+			}
+			else
+			{
+				if(!n.isRoot())
+					board.move(n.move);
+				
+				n = next;
+				
+			}
+			
+			if(n.child.isEmpty())
+			{
+				leaf = true;
+			}
 		}
-    	return num_clusters;
-    }
-
+		
+		return n;
+	}
+	
+	public OddMove pickMove(LinkedList<OddMove> valid, Node n){
+		for (OddMove m : valid)
+		{
+			Node child = n.hasChild(m);
+			if(child == null)
+			{
+				return m;
+			}
+		}
+		return null;	
+	}
+	
+	
+	public int simulation(Node n, OddBoard board){
+		Node prev = n;
+		
+		while(board.countEmptyPositions() > 0)
+		{
+			OddMove chosenmove = (OddMove) rnd1.chooseMove(board);
+			Node childcheck = prev.hasChild(chosenmove);
+			
+			if (childcheck == null)
+			{
+				Node newmove = new Node(chosenmove, prev);
+				prev = newmove;
+			}
+			else
+			{
+				prev = childcheck;
+			}
+			
+			board.move(chosenmove);
+		}
+		
+		int winner = board.getWinner();
+	
+		if(winner == turn)
+		{
+			winner = 1;
+		}
+		else
+		{
+			winner = 0;
+		}
+		
+		leaf = prev;
+		return winner;
+	}
+	
+	public Move selectBestMove(Node root){
+		Node best = root.child.get(0);
+		for(Node n : root.child)
+		{
+			if(n.getwinRate() > best.getwinRate())
+			{
+				best = n;
+			}
+		}
+		return best.move;
+	}
 }

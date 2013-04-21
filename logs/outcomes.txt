@@ -42,3 +42,10 @@
 47	THE MIGHTY AI	RandomPlayer	Player1	THE MIGHTY AI	0	game00047.log	
 48	THE MIGHTY AI	RandomPlayer	Player2	RandomPlayer	0	game00048.log	TIMEOUT Player1
 49	THE MIGHTY AI	RandomPlayer	Player2	RandomPlayer	0	game00049.log	TIMEOUT Player1
+50	THE MIGHTY AI	RandomPlayer	Player2	RandomPlayer	0	game00050.log	TIMEOUT Player1
+51	THE MIGHTY AI	RandomPlayer	Player2	RandomPlayer	0	game00051.log	TIMEOUT Player1
+52	THE MIGHTY AI	RandomPlayer	Player2	RandomPlayer	0	game00052.log	TIMEOUT Player1
+53	THE MIGHTY AI	RandomPlayer	Player2	RandomPlayer	0	game00053.log	TIMEOUT Player1
+54	THE MIGHTY AI	RandomPlayer	Player2	RandomPlayer	0	game00054.log	TIMEOUT Player1
+55	THE MIGHTY AI	RandomPlayer	Player2	RandomPlayer	0	game00055.log	TIMEOUT Player1
+56	THE MIGHTY AI	RandomPlayer	Player2	RandomPlayer	0	game00056.log	TIMEOUT Player1

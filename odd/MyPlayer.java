@@ -49,6 +49,7 @@ public class MyPlayer extends Player {
 		Node selected = selection(root, board);
 		
 		//Step 2: Expansion
+		expand(selected, board);
 		
 		//Step 3: Simulation
 		int winner = simulation(selected, board);
@@ -71,6 +72,9 @@ public class MyPlayer extends Player {
 	public Node selection(Node root, OddBoard board){
 		Node n = root;
 		boolean leaf = false;
+		
+		if(n.child.isEmpty())
+			leaf = true;
 		
 		while (!leaf)
 		{
@@ -98,16 +102,15 @@ public class MyPlayer extends Player {
 					board.move(n.move);
 				}
 				OddMove chosen = pickMove(board.getValidMoves(), n);
-				n = new Node(chosen, n);
+				next = new Node(chosen, n);
 			}
 			else
 			{
 				if(!n.isRoot())
 					board.move(n.move);
-				
-				n = next;
-				
 			}
+			
+			n = next;
 			
 			if(n.child.isEmpty())
 			{
@@ -128,6 +131,10 @@ public class MyPlayer extends Player {
 			}
 		}
 		return null;	
+	}
+	
+	public void expand(Node n, OddBoard board){
+		
 	}
 	
 	

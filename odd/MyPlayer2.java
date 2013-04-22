@@ -14,10 +14,10 @@ public class MyPlayer2 extends Player {
 	private Node leaf;
 	public static Node root;
 	private int first = 0;
-	private double constant = 10;
+	private double constant = 5;
 	
 	public MyPlayer2() {
-		super("THE MIGHTY AI");
+		super("The Newborn");
 		currBoard = null;
 	}
 	

@@ -105,3 +105,13 @@
 112	RandomPlayer	THE MIGHTY AI	Player1	RandomPlayer	0	game00112.log	TIMEOUT Player2
 113	RandomPlayer	THE MIGHTY AI	Player1	RandomPlayer	0	game00113.log	TIMEOUT Player2
 114	RandomPlayer	Monty	Player2	Monty	0	game00114.log	
+115	THE MIGHTY AI	THE MIGHTY AI	Player1	THE MIGHTY AI	0	game00115.log	
+116	THE MIGHTY AI	THE MIGHTY AI	Player2	THE MIGHTY AI	0	game00116.log	
+117	THE MIGHTY AI	The Newborn	Player1	THE MIGHTY AI	0	game00117.log	
+118	The Newborn	THE MIGHTY AI	Player1	The Newborn	0	game00118.log	
+119	THE MIGHTY AI	The Newborn	Player1	THE MIGHTY AI	0	game00119.log	TIMEOUT Player2
+120	THE MIGHTY AI	The Newborn	Player1	THE MIGHTY AI	0	game00120.log	TIMEOUT Player2
+121	THE MIGHTY AI	The Newborn	Player2	The Newborn	0	game00121.log	
+122	unforgiven	THE MIGHTY AI	Player1	unforgiven	0	game00122.log	
+123	THE MIGHTY AI	unforgiven	Player1	THE MIGHTY AI	0	game00123.log	
+124	unforgiven	The Newborn	Player1	unforgiven	0	game00124.log	

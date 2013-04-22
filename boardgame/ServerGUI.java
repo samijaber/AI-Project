@@ -46,7 +46,7 @@ implements BoardPanel.BoardPanelListener  {
     protected static final String[] PLAYER_CLASSES = { 
 	//"breakthrough.BTRandomPlayer", "breakthrough.BTFixedPlayer"
 	//"phootball.PhootballNullPlayer",
-        "odd.OddRandomPlayer", "odd.MyPlayer", "odd.MyPlayer2"
+        "odd.OddRandomPlayer", "odd.MyPlayer", "odd.MyPlayer2", "odd.april20th"
     };
     private static final int BOARD_SIZE_X = odd.OddBoardPanel.SRAD * 3 *odd.OddBoardPanel.SCALE *
     											((odd.OddBoard.SIZE * 2 +1)+2);

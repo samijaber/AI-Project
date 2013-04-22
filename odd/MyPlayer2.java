@@ -9,7 +9,7 @@ import boardgame.Player;
 public class MyPlayer2 extends Player {
 	OddBoard currBoard;
 	private OddRandomPlayer rnd1 = new OddRandomPlayer();
-	private int TIME_CUTOFF = 3000;
+	private int TIME_CUTOFF = 4000;
 	private int turn = 0;
 	private Node leaf;
 	public static Node root;
@@ -49,10 +49,7 @@ public class MyPlayer2 extends Player {
 		}
 		else
 		{
-			//Node opponentMove = FindOppMove(currBoard.getValidMoves());
-			//root = opponentMove;
 			root.parent = null;
-			System.out.println("THE CURRENT ROOT MOVE IS: " + root.move.toPrettyString());
 		}
 		
 		while((System.currentTimeMillis() - start) < TIME_CUTOFF) {
@@ -69,7 +66,7 @@ public class MyPlayer2 extends Player {
 			*/
 			monteCarlo(root);
 		}
-		System.out.println(System.currentTimeMillis() - start);
+		//System.out.println(System.currentTimeMillis() - start);
 		
 		Node best = selectBestMove(root);
 		//root = best; 

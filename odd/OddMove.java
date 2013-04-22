@@ -63,4 +63,11 @@ public class OddMove extends Move {
         destRow = Integer.parseInt(tokens[2]);
         destCol = Integer.parseInt(tokens[3]);
     }
+    
+    public boolean equals(OddMove m) {
+    	if(player == m.player && color == m.color && destRow == m.destRow && destCol == m.destCol)
+    		return true;
+    	return false;
+    }
+    
 }

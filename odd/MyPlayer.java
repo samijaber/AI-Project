@@ -9,7 +9,7 @@ import boardgame.Player;
 public class MyPlayer extends Player {
 	OddBoard currBoard;
 	private OddRandomPlayer rnd1 = new OddRandomPlayer();
-	private int TIME_CUTOFF = 3000;
+	private int TIME_CUTOFF = 4000;
 	private int turn = 0;
 	private Node leaf;
 	public static Node root;
@@ -30,7 +30,6 @@ public class MyPlayer extends Player {
 	System.out.println( "Move: " + move.toPrettyString() ); 
 	
 	if (first != 0)
-		//Move root to played node.
 		root = root.hasChild((OddMove) move);
 
 	}
@@ -49,24 +48,22 @@ public class MyPlayer extends Player {
 		}
 		else
 		{
-			//Node opponentMove = FindOppMove(currBoard.getValidMoves());
-			//root = opponentMove;
 			root.parent = null;
-			System.out.println("THE CURRENT ROOT MOVE IS: " + root.move.toPrettyString());
+			//System.out.println("THE CURRENT ROOT MOVE IS: " + root.move.toPrettyString());
 		}
 		
 		
 		LinkedList<OddMove> valmoves = currBoard.getValidMoves();
 		
+		Node next = new Node();
+		
 		for(int j = 0; j < 5; j++)
 		{
 			for (int i = 0; i < valmoves.size(); i++) {
 				OddBoard boardClone = (OddBoard) currBoard.clone();
-				Node next = new Node(valmoves.get(i), root, constant);
-				if(root.hasChild(next.move) == null)
-					root.addChild(next);
+				next = new Node(valmoves.get(i), root, constant);
 				boardClone.move(next.move);	
-				
+				next = root.hasChild(next.move);
 				//Step 3: Simulation
 				int winner = simulation(next, boardClone);
 				
@@ -79,29 +76,23 @@ public class MyPlayer extends Player {
 
 			monteCarlo(root);
 		}
-		System.out.println(System.currentTimeMillis() - start);
+		//System.out.println(System.currentTimeMillis() - start);
 		
 		Node best = selectBestMove(root);
-		//root = best; 
 		return best.move;
 	}
 
 	public void monteCarlo(Node root) {
-		//create a deep copy of the current board.
-		OddBoard board = (OddBoard) currBoard.clone();
-		
+		OddBoard board = (OddBoard) currBoard.clone();		
 		//Step 1/2: Selection + expansion
 		Node selected = selection(root, board);
-		
 		//Step 3: Simulation
 		int winner = simulation(selected, board);
-		
 		//Step 4: Back propagation
 		backprop(leaf, winner);
 	}
 	
 	public void backprop(Node n, int score){
-		//Make sure score is determined properly in Simulation.
 		n.wins += score;
 		n.visited ++;
 		if (!n.isRoot())
@@ -119,58 +110,40 @@ public class MyPlayer extends Player {
 		if(n.child.isEmpty())
 			leaf = true;
 		
-		while (!leaf)
-		{
+		while (!leaf) {
 			Node next = new Node();
-			
-			//get value of general unexplored node
 			double unexplored = Math.sqrt(Math.log(n.visited));
 			
-			if(max)
-			{
-
+			if(max) {
 				double maxvisited = 0;
-				for (Node c : n.child)
-				{
-					if (c.UCB() > maxvisited)
-					{
+				for (Node c : n.child) {
+					if (c.UCB() > maxvisited) {
 						next = c;
 						maxvisited = c.UCB();
 					}
 				}
 
 
-				if ((unexplored >= maxvisited) && board.getValidMoves().size() != n.child.size())
-				{
-					//all visited have lower value than an unexplored one
-					//pick an unexplored one at random from possible moves
-
+				if ((unexplored >= maxvisited) && board.getValidMoves().size() != n.child.size()) {
 					OddMove chosen = pickMove(board.getValidMoves(), n);
 					next = new Node(chosen, n, constant);
 				}
 			}
-			else
-			{
+			else {
 				double minvisited = 100;
-				for (Node c : n.child)
-				{
-					if (c.UCB() < minvisited)
-					{
+				for (Node c : n.child){
+					if (c.UCB() < minvisited) {
 						next = c;
 						minvisited = c.UCB();
 					}
 				}
-
-
-				if ((unexplored <= minvisited) && board.getValidMoves().size() != n.child.size())
-				{
-					//all visited have lower value than an unexplored one
-					//pick an unexplored one at random from possible moves
+				
+				if ((unexplored <= minvisited) && board.getValidMoves().size() != n.child.size()) {
 					OddMove chosen = pickMove(board.getValidMoves(), n);
 					next = new Node(chosen, n, constant);
 				}
 			}
-						
+			
 			board.move(next.move);
 			n = next;
 			max = !max;
@@ -178,7 +151,6 @@ public class MyPlayer extends Player {
 			if(n.child.isEmpty())
 				leaf = true;
 		}
-		
 		return n;
 	}
 	
@@ -253,7 +225,6 @@ class Node {
 	LinkedList<Node> child;
 	public double constant = 1;
 	
-	//Constructor for root Node.
 	public Node() {
 		wins = 0;
 		visited = 0;
@@ -269,8 +240,6 @@ class Node {
 		visited = 0;
 		this.constant = constant;
 		child = new LinkedList<Node>();
-		
-		//add this as a child of its parent
 		this.parent.addChild(this);
 	}
 	
@@ -306,7 +275,8 @@ class Node {
 	}
 	
 	public void addChild(Node ch) {
-		child.add(ch);
+		if (hasChild(ch.move) == null)
+			child.add(ch);
 	}
 	
 	public boolean isRoot(){
@@ -339,4 +309,3 @@ class Node {
 	}
 	
 }
-

@@ -37,6 +37,8 @@ public class OddBoard extends Board {
     private int winner = NOBODY;
     private int num_clusters = 0; // number of large clusters
     
+    private OddMove lastMove;
+    
     
     /** Returns a board in the starting position. */
     public OddBoard() {
@@ -54,6 +56,7 @@ public class OddBoard extends Board {
         this.turn = pb.turn;
         this.winner = pb.winner;
         this.numEmpty = pb.numEmpty;
+        this.lastMove = pb.lastMove;
     }
 
     /** Get the array containing the board data directly */
@@ -109,6 +112,9 @@ public class OddBoard extends Board {
         data[m.destRow + SIZE][m.destCol + SIZE] = 
         	(m.color == Piece.WP) ? Piece.WP : Piece.BP;
         
+        // update lastMove
+        lastMove = (OddMove) mm;
+        
         if(--numEmpty == 0) determineWinner();
         else turn = (turn == 1) ? 2 : 1;        
     }
@@ -116,6 +122,14 @@ public class OddBoard extends Board {
     /** Get the number of turns played. */
     public int getTurnsPlayed() {
         return moveCount;
+    }
+    
+    /**
+     * Returns the most recently made move on the board (not cloned)
+     * @return the last move played
+     */
+    public OddMove getLastMove() {
+    	return lastMove;
     }
     
     

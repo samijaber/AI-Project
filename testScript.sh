@@ -7,15 +7,15 @@ for i in {1..10}
 do 
 	java boardgame.Server -ng &
 	sleep 3
-	java boardgame.Client odd.MyPlayer &
-	sleep 3
 	java boardgame.Client odd.MyPlayer2 &
+	sleep 3
+	java boardgame.Client odd.OddRandomPlayer &
 	sleep 320
 
 	java boardgame.Server -ng &
 	sleep 3
-	java boardgame.Client odd.MyPlayer2 &
+	java boardgame.Client odd.OddRandomPlayer &
 	sleep 3
-	java boardgame.Client odd.MyPlayer &
-	sleep 320
+	java boardgame.Client odd.MyPlayer2 &
+	sleep 155
 done

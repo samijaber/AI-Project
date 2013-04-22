@@ -17,5 +17,5 @@ do
 	java boardgame.Client odd.MyPlayer2 &
 	sleep 3
 	java boardgame.Client odd.MyPlayer &
-	sleep 320
+	sleep 305
 done

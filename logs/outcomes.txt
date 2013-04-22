@@ -1,3 +1,7 @@
-1	The Noobinator	The Newborn	Player1	The Noobinator	0	game00001.log	
-2	The Noobinator	The Newborn	Player1	The Noobinator	0	game00002.log	
-3	The Noobinator	The Newborn	Player2	The Newborn	0	game00003.log	
+2	The Brotha	RandomPlayer	Player1	The Brotha	0	game00002.log	
+3	RandomPlayer	The Brotha	Player2	The Brotha	0	game00003.log	
+4	The Brotha	RandomPlayer	Player1	The Brotha	0	game00004.log	
+5	The Brotha	RandomPlayer	Player1	The Brotha	0	game00005.log	
+6	RandomPlayer	The Brotha	Player2	The Brotha	0	game00006.log	
+7	RandomPlayer	The Brotha	Player2	The Brotha	0	game00007.log	
+8	The Brotha	RandomPlayer	Player1	The Brotha	0	game00008.log	

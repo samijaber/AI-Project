@@ -14,23 +14,24 @@ public class MyPlayer extends Player {
 	private Node leaf;
 	public static Node root;
 	private int first = 0;
-	private double constant = 2;
-	
+	private double UCBconstant = 2;
+	private double minRollouts = 10;
+
 	public MyPlayer() {
-		super("The Noobinator");
+		super("The Sistah");
 		currBoard = null;
 	}
 	
 	public MyPlayer(String name) {
-		super("The Noobinator");
+		super("The Sistah");
 		currBoard = null;
 	}
 	
     public void movePlayed( Board board, Move move ) {
 	System.out.println( "Move: " + move.toPrettyString() ); 
 	
-	if (first != 0)
-		root = root.hasChild((OddMove) move);
+	//if (first != 0)
+		//root = root.hasChild((OddMove) move);
 
 	}
 	
@@ -40,7 +41,9 @@ public class MyPlayer extends Player {
 		long start = System.currentTimeMillis();
 		currBoard = (OddBoard) board;
 		turn = board.getTurn();
+		root = new Node();
 		
+		/*
 		if(first == 0)
 		{
 			root = new Node();
@@ -51,17 +54,18 @@ public class MyPlayer extends Player {
 			root.parent = null;
 			//System.out.println("THE CURRENT ROOT MOVE IS: " + root.move.toPrettyString());
 		}
+		*/
 		
 		
 		LinkedList<OddMove> valmoves = currBoard.getValidMoves();
 		
 		Node next = new Node();
 		
-		for(int j = 0; j < 5; j++)
+		for(int j = 0; j < minRollouts; j++)
 		{
 			for (int i = 0; i < valmoves.size(); i++) {
 				OddBoard boardClone = (OddBoard) currBoard.clone();
-				next = new Node(valmoves.get(i), root, constant);
+				next = new Node(valmoves.get(i), root, UCBconstant);
 				boardClone.move(next.move);	
 				next = root.hasChild(next.move);
 				//Step 3: Simulation
@@ -126,7 +130,7 @@ public class MyPlayer extends Player {
 
 				if ((unexplored >= maxvisited) && board.getValidMoves().size() != n.child.size()) {
 					OddMove chosen = pickMove(board.getValidMoves(), n);
-					next = new Node(chosen, n, constant);
+					next = new Node(chosen, n, UCBconstant);
 				}
 			}
 			else {
@@ -140,7 +144,7 @@ public class MyPlayer extends Player {
 				
 				if ((unexplored <= minvisited) && board.getValidMoves().size() != n.child.size()) {
 					OddMove chosen = pickMove(board.getValidMoves(), n);
-					next = new Node(chosen, n, constant);
+					next = new Node(chosen, n, UCBconstant);
 				}
 			}
 			
@@ -178,7 +182,7 @@ public class MyPlayer extends Player {
 			
 			if (childcheck == null)
 			{
-				Node newmove = new Node(chosenmove, prev, constant);
+				Node newmove = new Node(chosenmove, prev, UCBconstant);
 				prev = newmove;
 			}
 			else

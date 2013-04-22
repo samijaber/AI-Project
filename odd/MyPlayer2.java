@@ -6,7 +6,7 @@ import boardgame.Board;
 import boardgame.Move;
 import boardgame.Player;
 
-public class MyPlayer extends Player {
+public class MyPlayer2 extends Player {
 	OddBoard currBoard;
 	private OddRandomPlayer rnd1 = new OddRandomPlayer();
 	private int TIME_CUTOFF = 3000;
@@ -14,14 +14,14 @@ public class MyPlayer extends Player {
 	private Node leaf;
 	public static Node root;
 	private int first = 0;
-	private double constant = 1;
+	private double constant = 10;
 	
-	public MyPlayer() {
+	public MyPlayer2() {
 		super("THE MIGHTY AI");
 		currBoard = null;
 	}
 	
-	public MyPlayer(String name) {
+	public MyPlayer2(String name) {
 		super("THE MIGHTY AI");
 		currBoard = null;
 	}
@@ -234,99 +234,3 @@ public class MyPlayer extends Player {
 		return best;
 	}
 }
-
-class Node {
-	OddMove move;
-	public double wins;
-	public double visited;
-	Node parent;
-	LinkedList<Node> child;
-	public double constant = 1;
-	
-	//Constructor for root Node.
-	public Node() {
-		wins = 0;
-		visited = 0;
-		move = null;
-		parent = null;
-		child = new LinkedList<Node>();
-	}
-	
-	public Node(OddMove move, Node parent, double constant){
-		this.move = move;
-		this.parent = parent;
-		wins = 0;
-		visited = 0;
-		this.constant = constant;
-		child = new LinkedList<Node>();
-		
-		//add this as a child of its parent
-		this.parent.addChild(this);
-	}
-	
-	public Node hasChild(OddMove move) {
-
-		for (Node n: child)
-		{
-			if ((n.move.destCol == move.destCol) && (n.move.destRow == move.destRow))
-			{
-				if(n.move.color == move.color)
-					return n;
-			}
-		}
-		return null;
-	}
-	
-	public Node removeChild(OddMove move) {
-
-		for (Node n: child)
-		{
-			if ((n.move.destCol == move.destCol) && (n.move.destRow == move.destRow))
-			{
-				if(n.move.color == move.color)
-					child.remove(n);
-					return n;
-			}
-		}
-		return null;
-	}
-	
-	public double getwinRate(){
-		return wins/visited;
-	}
-	
-	public void addChild(Node ch) {
-		child.add(ch);
-	}
-	
-	public boolean isRoot(){
-		if (parent == null)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	
-	public void addWin(){
-		wins++;
-	}
-	
-	public double UCB(){
-		double exploration = 0;
-		if (parent.visited > 0)
-		{
-			exploration = Math.sqrt(Math.log(parent.visited));
-		}
-		if (visited > 0)
-		{
-			exploration = exploration/Math.sqrt(visited);
-		}
-		
-		return getwinRate() + constant * exploration;
-	}
-	
-}
-

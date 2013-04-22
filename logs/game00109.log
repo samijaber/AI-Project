@@ -1,0 +1,18 @@
+# Server version 0.05 running on open-17.CS.McGill.CA:8123
+# Game ID: 109
+# Board class: odd.OddBoard
+# Timeout: 5000
+# Date: Sun Apr 21 21:23:40 EDT 2013
+# Player 1: Player1, 'THE MIGHTY AI', running on open-17.CS.McGill.CA
+# Player 2: Player2, 'RandomPlayer', running on open-17.CS.McGill.CA
+START Player1 THE MIGHTY AI
+START Player2 RandomPlayer
+1 BLACK -3 -3
+2 BLACK 2 4
+1 WHITE 0 0
+2 BLACK 3 1
+1 WHITE 1 -1
+2 WHITE -1 -2
+GAMEOVER USER CANCEL
+UNDECIDED
+# Game ended: Sun Apr 21 21:23:51 EDT 2013

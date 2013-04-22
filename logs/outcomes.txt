@@ -115,3 +115,14 @@
 122	unforgiven	THE MIGHTY AI	Player1	unforgiven	0	game00122.log	
 123	THE MIGHTY AI	unforgiven	Player1	THE MIGHTY AI	0	game00123.log	
 124	unforgiven	The Newborn	Player1	unforgiven	0	game00124.log	
+126	The Newborn	RandomPlayer	Player1	The Newborn	0	game00126.log	
+127	THE MIGHTY AI	The Newborn	Player1	THE MIGHTY AI	0	game00127.log	
+128	The Newborn	THE MIGHTY AI	Player2	THE MIGHTY AI	0	game00128.log	
+129	The Newborn	THE MIGHTY AI	Player1	The Newborn	0	game00129.log	TIMEOUT Player2
+130	The Newborn	THE MIGHTY AI	Player2	THE MIGHTY AI	0	game00130.log	
+131	THE MIGHTY AI	The Newborn	Player1	THE MIGHTY AI	0	game00131.log	
+132	The Newborn	THE MIGHTY AI	Player1	The Newborn	0	game00132.log	TIMEOUT Player2
+133	The Newborn	THE MIGHTY AI	Player2	THE MIGHTY AI	0	game00133.log	
+134	The Noobinator	The Newborn	Player2	The Newborn	0	game00134.log	TIMEOUT Player1
+135	The Noobinator	The Newborn	Player2	The Newborn	0	game00135.log	TIMEOUT Player1
+136	The Noobinator	The Newborn	Player2	The Newborn	0	game00136.log	TIMEOUT Player1

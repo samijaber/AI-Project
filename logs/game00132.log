@@ -1,0 +1,17 @@
+# Server version 0.05 running on open-17.CS.McGill.CA:8123
+# Game ID: 132
+# Board class: odd.OddBoard
+# Timeout: 5000
+# Date: Sun Apr 21 22:43:06 EDT 2013
+# Player 1: Player1, 'The Newborn', running on open-17.CS.McGill.CA
+# Player 2: Player2, 'THE MIGHTY AI', running on open-17.CS.McGill.CA
+START Player1 The Newborn
+START Player2 THE MIGHTY AI
+1 BLACK 1 2
+2 WHITE 1 -1
+1 WHITE 2 -2
+2 WHITE 3 1
+1 WHITE 0 -3
+GAMEOVER TIMEOUT Player2
+WINNER Player1
+# Game ended: Sun Apr 21 22:43:27 EDT 2013

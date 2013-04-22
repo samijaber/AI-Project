@@ -14,15 +14,15 @@ public class MyPlayer extends Player {
 	private Node leaf;
 	public static Node root;
 	private int first = 0;
-	private double constant = 1;
+	private double constant = 2;
 	
 	public MyPlayer() {
-		super("THE MIGHTY AI");
+		super("The Noobinator");
 		currBoard = null;
 	}
 	
 	public MyPlayer(String name) {
-		super("THE MIGHTY AI");
+		super("The Noobinator");
 		currBoard = null;
 	}
 	
@@ -55,18 +55,28 @@ public class MyPlayer extends Player {
 			System.out.println("THE CURRENT ROOT MOVE IS: " + root.move.toPrettyString());
 		}
 		
-		while((System.currentTimeMillis() - start) < TIME_CUTOFF) {
-			/*
-			MonteCarlo mcts1 = new MonteCarlo(currBoard, turn, root);
-			MonteCarlo mcts2 = new MonteCarlo(currBoard, turn, root);
-			
-			Thread t1 = new Thread(mcts1);
-			Thread t2 = new Thread(mcts2);
-			
-			t1.start();
-			t2.start();
 		
-			*/
+		LinkedList<OddMove> valmoves = currBoard.getValidMoves();
+		
+		for(int j = 0; j < 5; j++)
+		{
+			for (int i = 0; i < valmoves.size(); i++) {
+				OddBoard boardClone = (OddBoard) currBoard.clone();
+				Node next = new Node(valmoves.get(i), root, constant);
+				if(root.hasChild(next.move) == null)
+					root.addChild(next);
+				boardClone.move(next.move);	
+				
+				//Step 3: Simulation
+				int winner = simulation(next, boardClone);
+				
+				//Step 4: Back propagation
+				backprop(leaf, winner);
+
+			}
+		}
+		while((System.currentTimeMillis() - start) < TIME_CUTOFF) {
+
 			monteCarlo(root);
 		}
 		System.out.println(System.currentTimeMillis() - start);

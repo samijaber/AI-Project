@@ -14,7 +14,7 @@ public class MyPlayer2 extends Player {
 	private Node leaf;
 	public static Node root;
 	private int first = 0;
-	private double constant = 5;
+	private double constant = 2;
 	
 	public MyPlayer2() {
 		super("The Newborn");
@@ -118,7 +118,6 @@ public class MyPlayer2 extends Player {
 			
 			if(max)
 			{
-
 				double maxvisited = 0;
 				for (Node c : n.child)
 				{
@@ -128,7 +127,6 @@ public class MyPlayer2 extends Player {
 						maxvisited = c.UCB();
 					}
 				}
-
 
 				if ((unexplored >= maxvisited) && board.getValidMoves().size() != n.child.size())
 				{

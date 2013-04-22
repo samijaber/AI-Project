@@ -1,0 +1,12 @@
+# Server version 0.05 running on open-17.CS.McGill.CA:8123
+# Game ID: 136
+# Board class: odd.OddBoard
+# Timeout: 5000
+# Date: Sun Apr 21 22:57:58 EDT 2013
+# Player 1: Player1, 'The Noobinator', running on open-17.CS.McGill.CA
+# Player 2: Player2, 'The Newborn', running on open-17.CS.McGill.CA
+START Player1 The Noobinator
+START Player2 The Newborn
+GAMEOVER TIMEOUT Player1
+WINNER Player2
+# Game ended: Sun Apr 21 22:58:04 EDT 2013

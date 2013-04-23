@@ -1,30 +1,13 @@
-# Server version 0.05 running on open-17.CS.McGill.CA:8123
+# Server version 0.05 running on 192.168.0.102:8123
 # Game ID: 83
 # Board class: odd.OddBoard
 # Timeout: 5000
-# Date: Sun Apr 21 19:18:24 EDT 2013
-# Player 1: Player1, 'THE MIGHTY AI', running on open-17.CS.McGill.CA
-# Player 2: Player2, 'RandomPlayer', running on open-17.CS.McGill.CA
-START Player1 THE MIGHTY AI
-START Player2 RandomPlayer
-1 WHITE 4 1
-2 WHITE -2 -3
-1 BLACK -3 -3
-2 WHITE 1 2
-1 WHITE 2 3
-2 WHITE 2 1
-1 WHITE 1 0
-2 WHITE 2 4
-1 BLACK -1 2
-2 WHITE 3 -1
-1 BLACK 0 4
-2 BLACK 0 0
-1 BLACK -1 -4
-2 WHITE 0 -1
-1 WHITE 4 3
-2 BLACK 3 4
-1 BLACK 4 0
-2 BLACK 3 1
-GAMEOVER TIMEOUT Player1
-WINNER Player2
-# Game ended: Sun Apr 21 19:19:08 EDT 2013
+# Date: Mon Apr 22 22:23:32 EDT 2013
+# Player 1: Player1, 'The Sistah', running on 192.168.0.102
+# Player 2: Player2, 'The Sistah', running on 192.168.0.102
+START Player1 The Sistah
+START Player2 The Sistah
+1 WHITE -3 -2
+GAMEOVER TIMEOUT Player2
+WINNER Player1
+# Game ended: Mon Apr 22 22:23:40 EDT 2013

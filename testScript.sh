@@ -10,7 +10,7 @@ do
 	java boardgame.Client odd.MyPlayer2 &
 	sleep 3
 	java boardgame.Client odd.OddRandomPlayer &
-	sleep 320
+	sleep 155
 
 	java boardgame.Server -ng &
 	sleep 3

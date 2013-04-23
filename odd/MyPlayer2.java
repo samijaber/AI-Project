@@ -9,7 +9,7 @@ import boardgame.Player;
 public class MyPlayer2 extends Player {
 	OddBoard currBoard;
 	private OddRandomPlayer rnd1 = new OddRandomPlayer();
-	private int TIME_CUTOFF = 4000;
+	private int TIME_CUTOFF = 3000;
 	private int turn = 0;
 	private Node leaf;
 	public static Node root;
@@ -29,11 +29,13 @@ public class MyPlayer2 extends Player {
 	
     public void movePlayed( Board board, Move move ) {
 	System.out.println( "Move: " + move.toPrettyString() ); 
-	
-	if (first != 0)
-		root = root.hasChild((OddMove) move);
 
+	if (first != 0)
+	{
+		Node lastMove = new Node((OddMove) move, root, UCBconstant); 
+		root = root.hasChild((OddMove) move);
 	}
+    }
 	
 
 	@Override

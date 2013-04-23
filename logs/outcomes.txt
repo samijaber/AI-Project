@@ -88,3 +88,10 @@
 91	The Sistah	The Sistah	Player1	The Sistah	0	game00091.log	TIMEOUT Player2
 92	The Sistah	The Sistah	Player1	The Sistah	0	game00092.log	TIMEOUT Player2
 93	The Sistah	The Sistah	Player1	The Sistah	0	game00093.log	TIMEOUT Player2
+94	The Sistah	The Sistah	Player1	The Sistah	0	game00094.log	TIMEOUT Player2
+95	The Sistah	The Sistah	Player1	The Sistah	0	game00095.log	TIMEOUT Player2
+96	The Sistah	The Sistah	Player1	The Sistah	0	game00096.log	TIMEOUT Player2
+97	The Sistah	The Sistah	Player1	The Sistah	0	game00097.log	TIMEOUT Player2
+98	The Sistah	The Sistah	Player1	The Sistah	0	game00098.log	TIMEOUT Player2
+99	The Sistah	RandomPlayer	Player1	The Sistah	0	game00099.log	
+100	The Sistah	The Brotha	Player1	The Sistah	0	game00100.log	TIMEOUT Player2

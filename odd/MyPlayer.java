@@ -210,7 +210,7 @@ public class MyPlayer extends Player {
 		Node best = root.child.get(0);
 		for(Node n : root.child)
 		{
-			if(n.getwinRate() > best.getwinRate())
+			if(n.UCB() > best.UCB())
 			{
 				best = n;
 			}
